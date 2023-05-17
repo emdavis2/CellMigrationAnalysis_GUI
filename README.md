@@ -18,7 +18,7 @@ Now, run this container with the following:
 ```
 docker run -v $(pwd):/home/ -it python_docker bash
 ```
-Note: you must be in the directory of this repo on your computer for this to work! `$(pwd)` should ultimately result in the path to this repo on your computer!
+Note: you must be in the directory of this repo on your computer for this to work! `$(pwd)` should ultimately result in the path to this repo on your computer, as we want to port this repo on your local computer to /home/ in the virtual terminal. If running on a Windows machine, it may be necessary to actually type out the path to this repo on your computer instead of `$(pwd)`.
 
 Now your terminal should be interactive with the docker container we have just built. We can use the Makefile to make the figures and fit the model to our data. To generate the autocorrelation figures for the cells migrating on glass, use:
 
