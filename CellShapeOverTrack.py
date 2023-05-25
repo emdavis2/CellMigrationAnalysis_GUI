@@ -34,6 +34,9 @@ tracks_region2, tracks_geo_region2, region2_cells, region2_endpointcells = compi
 
 tracks_region3, tracks_geo_region3, region3_cells, region3_endpointcells = compile_data_tracks(data_path3, min_track_length, region3, pixel_size)
 
+#check to see if the path exists, if not make the directory
+if not os.path.exists('sentinels'):
+  os.mkdir('sentinels')
 
 #clears out sentinel file if it exists
 open('sentinels/cellshape_histogram.txt','w').close()

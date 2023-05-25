@@ -56,6 +56,10 @@ else:
 
 sampling_t = 5 #min per frame
 
+#check to see if the path exists, if not make the directory
+if not os.path.exists('sentinels'):
+  os.mkdir('sentinels')
+
 #clears out sentinel file if it exists
 open('sentinels/histogram_boxplot.txt','w').close()
 #create new sentinel file to write to
