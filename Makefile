@@ -4,7 +4,6 @@
 .PHONY: 
 
 clean:
-	rm -rf figures
 	rm -rf sentinels
 	rm -rf .created-dirs
 
