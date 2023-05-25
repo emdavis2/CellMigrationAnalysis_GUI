@@ -30,6 +30,10 @@ open('sentinels/ACF_figures_{}.txt'.format(region),'w').close()
 acf_fig_region = open('sentinels/ACF_figures_{}.txt'.format(region),'w')
 file_lines = []
 
+#check to see if the path exists, if not make the directory
+if not os.path.exists(save_path):
+  os.mkdir(save_path)
+
 #where acf figures are saved
 figure_path = save_path + '/acf_figures'
 
