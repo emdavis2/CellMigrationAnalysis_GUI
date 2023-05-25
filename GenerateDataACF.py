@@ -24,6 +24,10 @@ if region == 'stiff':
 else:
   region_name = region
 
+#check to see if the path exists, if not make the directory
+if not os.path.exists('sentinels'):
+  os.mkdir('sentinels')
+
 #clears out sentinel file if it exists
 open('sentinels/ACF_figures_{}.txt'.format(region),'w').close()
 #create new sentinel file to write to
