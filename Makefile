@@ -10,24 +10,14 @@ clean:
 .created-dirs:
 	mkdir -p sentinels
 	touch .created-dirs
+	
 
-# Create the autocorrelation figures for glass data
-sentinels/ACF_figures_glass.txt: .created-dirs 2023_03_30_Data/glass_data\
+# Create the autocorrelation figures 
+sentinels/ACF_figures.txt: .created-dirs data/stiff_gel\
  functions/acf_functions.py functions/compile_data_tracks_function.py\
- functions/libraries/track_functions.py
-	python3 GenerateDataACF.py '2023_03_30_Data/glass_data' 30 'glass' 'GUI_test_figures'
-
-# Create the autocorrelation figures for soft gel data
-sentinels/ACF_figures_soft_gel.txt: .created-dirs 2023_03_30_Data/soft_gel_data\
- functions/acf_functions.py functions/compile_data_tracks_function.py\
- functions/libraries/track_functions.py
-	python3 GenerateDataACF.py '2023_03_30_Data/soft_gel_data' 30 'soft_gel' 'GUI_test_figures'
-
-# Create the autocorrelation figures for stiff gel data
-sentinels/ACF_figures_stiff_gel.txt: .created-dirs 2023_03_30_Data/stiff_gel_data\
- functions/acf_functions.py functions/compile_data_tracks_function.py\
- functions/libraries/track_functions.py
-	python3 GenerateDataACF.py '2023_03_30_Data/stiff_gel_data' 30 'stiff_gel' 'GUI_test_figures'
+ functions/libraries/track_functions.py functions/libraries/qc_functions.py\
+ functions/libraries/filter_cells_fns.py functions/libraries/centers.py
+	python3 GenerateDataACF.py ['2023_03_30_Data/glass_data','2023_03_30_Data/stiff_gel_data','2023_03_30_Data/soft_gel_data'] 30 ['glass','stiff_gel','soft_gel'] 'GUI_test_figures'
 
 # Create the boxplot and histogram figures for both glass and gel data
 sentinels/histogram_boxplot.txt: .created-dirs 2023_03_30_Data/glass_data\
