@@ -1,11 +1,47 @@
-Cell Migration Analysis Repo for making a GUI
+DRACULA (Durotactic Analysis of Cellular...)
 ================
 ## Quick Summary:
 The goal of this project is to analyze shape and motion data from movies of cells migrating and find correlations that can explain how the two are related and what unique behaviors are exhibited on different substrates in terms of material and stiffness that the cells are moving on. 
 
-This repository contains the source data and code for analysis with the goal of building a GUI that allows users to easily run the analyses.
+This repository contains the source data and code for analysis. The graphical user interface is a tool to easily run analyses on shape and motion metrics of cells to find correlations. Users are able to input treatments and generate figures desired. 
+
+## Navigation
+- run file gui_analysis_interface.py to generate figures through the gui
+- example data for 3 treatments is contained in the /data folder
+- 
+
+## Installation guide & use
+  #### 1. Executable File Option
+  1. No installation required.
+  2. Download executable file from (link in git).
+  3. Open executable file to launch GUI.
+  
+  #### 2. Clone repo
+  1. install python 
+  2. clone Git repo
+  3. open terminal and run pip install -r reqirements.txt
+  4. launch gui_analysis_interface.py
+
+  ### 3. Conda env
+  1. install anaconda
+  2. download the .yml file named dracula.yml
+  3. in conda terminal type: conda env create -f dracula.yml
+
+## Code functionality
 
 
+## Python library dependencies
+pandas==1.4.4\
+numpy\
+matplotlib\
+scipy 
+tiffile\
+seaborn\
+tkinter\
+subprocess
+
+
+delete???????? from here down
 ## How to Run:
 Clone this repository and navigate to the folder of this repository on your computer (where the Docker file is located) and build the docker container by running:
 
