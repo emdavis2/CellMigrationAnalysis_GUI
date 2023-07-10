@@ -3,16 +3,16 @@ from tkinter import filedialog
 from tkinter import messagebox
 import subprocess
 from tkinter import ttk
-# import customtkinter
-from PIL import Image, ImageTk
-import pandas as pd
-from skimage.color.rgb_colors import black
 
-filepath = ""
-data_path = ""
+
+
+# filepath = ""
+# data_path = ""
 data_path_1 = False
 data_path_2 = False
 data_path_3 = False
+data_path = []
+region = []
 
 # need 2 sections: retrieve data
 # select figure specifications/modify
@@ -177,7 +177,7 @@ class CellSegmentationGUI:
 
         # Create button to run the python script through gui
         # self.run_button = tk.Button(self.left_frame, text="Generate Graphs", command=self.run_sc)
-        self.run_button = ttk.Button(self.left_frame, text="Generate Graphs", style="RoundedButton.TButton")
+        self.run_button = ttk.Button(self.left_frame, text="Generate Graphs", style="RoundedButton.TButton", command=self.run_sc)
         # self.ttk.Button(self.left_frame, text="Generate Graphs", command=self.run_sc, style="RoundedButton.TButton")
         self.run_button.pack(pady=20)
 
@@ -211,11 +211,13 @@ class CellSegmentationGUI:
     def select_data_2(self):
         global data_path_2
         data_path_2 = filedialog.askdirectory()
+        # data_path.append(filedialog.askdirectory())
         self.text_widget.insert(tk.END, f"Soft Gel: {data_path_2}\n")
 
     def select_data_3(self):
         global data_path_3
         data_path_3 = filedialog.askdirectory()
+        # data_path.append(filedialog.askdirectory())
         self.text_widget.insert(tk.END, f"Glass: {data_path_3}\n")
 
     def open_file(self):
@@ -244,6 +246,7 @@ class CellSegmentationGUI:
             global data_path_2
             global data_path_3
             global filepath
+            global region
             # check if filepath was entered and retrieve name if it was
             if len(self.enter_mkdir.get()) != 0:
                 mkdir_name = self.enter_mkdir.get()
@@ -261,39 +264,55 @@ class CellSegmentationGUI:
                 fig = "GenerateDataACF.py"
 
                 if self.stiff_gel_var.get() == 1:
-                    surface = 'stiff_gel'
-                    data_path = data_path_1
+                    region.append(self.t_1.get())
+                    data_path.append(data_path_1)
+                    #surface = 'stiff_gel'
+                    #data_path.append() data_path_1
                     # data_path = "2023_03_30_Data/stiff_gel_data"
                 if self.soft_gel_var.get() == 1:
-                    surface = 'soft_gel'
-                    data_path = data_path_2
+                    region.append(self.t_2.get())
+                    data_path.append(data_path_2)
+                    # surface = 'soft_gel'
+                    # data_path = data_path_2
                     # data_path = "2023_03_30_Data/soft_gel_data"
                 if self.glass_var.get() == 1:
+                    region.append(self.t_3.get())
+                    data_path.append(data_path_3)
                     surface = 'glass'
-                    data_path = data_path_3
+                    # data_path = data_path_3
                     # data_path = "2023_03_30_Data/glass_data"
 
-                line = f"python, {fig}, {data_path}, {min_length}, {surface}, {filepath}"  # data_path or data
-                subprocess.call(["python", fig, data_path, min_length, surface, filepath])
+                line = f"python, {fig}, {data_path}, {min_length}, {region}, {filepath}"  # data_path or data
+                subprocess.call(["python", fig, data_path, min_length, region, filepath])
+                region = []
+                data_path = []
 
             if self.hist_fun_var.get() == 1:
                 fig = "CellShapeOverTrack.py"
                 if self.stiff_gel_var.get() == 1:
+                    region.append(self.t_1.get())
+                    data_path.append(data_path_1)
                     surface_1 = 'stiff_gel'
                     # data_path = "2023_03_30_Data/stiff_gel_data"
                 if self.soft_gel_var.get() == 1:
+                    region.append(self.t_2.get())
+                    data_path.append(data_path_2)
                     surface_2 = 'soft_gel'
                     # data_path = "2023_03_30_Data/soft_gel_data"
                 if self.glass_var.get() == 1:
+                    region.append(self.t_3.get())
+                    data_path.append(data_path_3)
                     surface_3 = 'glass'
                     # data_path = "2023_03_30_Data/glass_data"
 
                     # take in list of data paths and surfaces
 
-                line = f"python, {fig}, {data_path_1}, {data_path_2}, {data_path_3}, {min_length}, {surface_1}, {surface_2}, {surface_3}, {filepath}"  # data_path or data
-                subprocess.call(["python", fig, data_path_1, data_path_2, data_path_3, min_length, surface_1, surface_2, surface_3, filepath])
+                line = f"python, {fig}, {data_path}, {min_length}, {region}, {filepath}"  # data_path or data
+                subprocess.call(["python", fig, data_path, min_length, region, filepath])
                 # note: going to need to concatenate the inputs I think, make a fxn that correctly concats them.
                 # so there is more user autonomy, right now fits script tho
+                region = []
+                data_path = []
 
             if self.box_fun_var.get() == 1:
                 fig = "GenerateDataHistogramBoxplot.py"
@@ -301,23 +320,28 @@ class CellSegmentationGUI:
                     # surface_1 = 'stiff_gel'
                     surface_1 = self.t_1.get()
                     surface_1 = f'{surface_1}'
+                    # region.append(f'{surface_1}')
                     # data_path = "2023_03_30_Data/stiff_gel_data"
                 if self.soft_gel_var.get() == 1:
-                    # surface_2 = 'soft_gel'
-                    surface_2 = self.t_2.get()
+                    region.append(self.t_2.get())
+                    data_path.append(data_path_2)
                     surface_2 = f'{surface_2}'
+                    # region.append(f'{surface_2}')
                     # data_path = "2023_03_30_Data/soft_gel_data"
                 if self.glass_var.get() == 1:
-                    surface_3 = self.t_3.get()
-                    surface_3 = f'{surface_3}'
+                    region.append(self.t_3.get())
+                    data_path.append(data_path_3)
+                    # region.append(f'{surface_3}')
                     # surface_3 = 'glass'
                     # data_path = "2023_03_30_Data/glass_data"
                     # data_path = "2023_03_30_Data/glass_data"
 
-                line = f"python, {fig}, {data_path_1}, {data_path_2}, {data_path_3}, {min_length}, {surface_1}, {surface_2}, {surface_3}, {filepath}"  # data_path or data
-                subprocess.call(["python", fig, data_path_1, data_path_2, data_path_3, min_length, surface_1, surface_2, surface_3, filepath])
+                line = f"python, {fig}, {data_path}, {min_length}, {region}, {filepath}"  # data_path or data
+                subprocess.call(["python", fig, data_path, min_length, region, filepath])
                 # note: going to need to concatenate the inputs I think, make a fxn that correctly concats them.
                 # so there is more user autonomy, right now fits script tho
+                region = []
+                data_path = []
 
             # ensure that python environment is running pandas 1.4.4
             # settings ->  python environment -> package
