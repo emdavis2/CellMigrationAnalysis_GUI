@@ -6,9 +6,8 @@ The goal of this project is to analyze shape and motion data from movies of cell
 This repository contains the source data and code for analysis. The graphical user interface is a tool to easily run analyses on shape and motion metrics of cells to find correlations. Users are able to input treatments and generate figures desired. 
 
 ## Navigation
-- run file gui_analysis_interface.py to generate figures through the gui
+- run script gui_analysis_interface.py to generate figures through the gui
 - example data for 3 treatments is contained in the /data folder
-- 
 
 ## Installation guide & use
   #### 1. Executable File Option
@@ -25,11 +24,12 @@ This repository contains the source data and code for analysis. The graphical us
   ### 3. Conda env
   1. install anaconda
   2. download the .yml file named dracula.yml
-  3. in conda terminal type: ``` conda env create -f dracula.yml ```
+  3. in conda terminal execute: ``` conda env create -f dracula.yml ```
 
 
 ## Code functionality
-
+- CellShapeOverTrack.py, GenerateDataHistogramBoxplot.py, and GenerateDataACF.py contain code tied to GUI for generation of figures/analyses
+- 
 
 ## Python library dependencies
 pandas==1.4.4\
