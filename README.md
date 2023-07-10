@@ -25,7 +25,8 @@ This repository contains the source data and code for analysis. The graphical us
   ### 3. Conda env
   1. install anaconda
   2. download the .yml file named dracula.yml
-  3. in conda terminal type: conda env create -f dracula.yml
+  3. in conda terminal type: ``` conda env create -f dracula.yml ```
+
 
 ## Code functionality
 
