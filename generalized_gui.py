@@ -8,11 +8,11 @@ from tkinter import ttk
 
 # filepath = ""
 # data_path = ""
-data_path_1 = False
-data_path_2 = False
-data_path_3 = False
-data_path = []
-region = []
+data_path_1 = ""
+data_path_2 = ""
+data_path_3 = ""
+data_path: list[str] = []
+region: list[str] = []
 
 # need 2 sections: retrieve data
 # select figure specifications/modify
@@ -206,19 +206,19 @@ class CellSegmentationGUI:
     def select_data(self):
         global data_path_1
         data_path_1 = filedialog.askdirectory()
-        self.text_widget.insert(tk.END, f"Stiff Gel: {data_path_1}\n")
+        self.text_widget.insert(tk.END, f"Treatment 1: {data_path_1}\n")
 
     def select_data_2(self):
         global data_path_2
         data_path_2 = filedialog.askdirectory()
         # data_path.append(filedialog.askdirectory())
-        self.text_widget.insert(tk.END, f"Soft Gel: {data_path_2}\n")
+        self.text_widget.insert(tk.END, f"Treatment 2: {data_path_2}\n")
 
     def select_data_3(self):
         global data_path_3
         data_path_3 = filedialog.askdirectory()
         # data_path.append(filedialog.askdirectory())
-        self.text_widget.insert(tk.END, f"Glass: {data_path_3}\n")
+        self.text_widget.insert(tk.END, f"Treatment 3: {data_path_3}\n")
 
     def open_file(self):
         self.text_widget.insert(tk.END, "Open file option selected\n")
@@ -240,7 +240,7 @@ class CellSegmentationGUI:
                                         "please email noajam@unc.edu.\n")
 
     def run_sc(self):
-        try:
+        # try:
             global data_path
             global data_path_1
             global data_path_2
@@ -258,32 +258,59 @@ class CellSegmentationGUI:
             # for i checkbox in checked substrates subprocess.call... command lines for each
             # also need to encapsulate acf calling and for call in fxn go through substrates
 
-            min_length = self.enter_min_length.get()
+            min_length = int(self.enter_min_length.get())
+            print(min_length)
 
             if self.acf_fun_var.get() == 1:
                 fig = "GenerateDataACF.py"
 
                 if self.stiff_gel_var.get() == 1:
                     region.append(self.t_1.get())
+                    print(region)
                     data_path.append(data_path_1)
+                    print(data_path)
                     #surface = 'stiff_gel'
                     #data_path.append() data_path_1
                     # data_path = "2023_03_30_Data/stiff_gel_data"
                 if self.soft_gel_var.get() == 1:
                     region.append(self.t_2.get())
+                    print(region)
+                    print(data_path)
                     data_path.append(data_path_2)
                     # surface = 'soft_gel'
                     # data_path = data_path_2
                     # data_path = "2023_03_30_Data/soft_gel_data"
                 if self.glass_var.get() == 1:
                     region.append(self.t_3.get())
+                    print(region)
                     data_path.append(data_path_3)
-                    surface = 'glass'
+                    print(data_path)
+                    # surface = 'glass'
                     # data_path = data_path_3
                     # data_path = "2023_03_30_Data/glass_data"
+                print("almost there")
 
-                line = f"python, {fig}, {data_path}, {min_length}, {region}, {filepath}"  # data_path or data
+                # f"python3 {fig} {data_path} {min_length} {region} {filepath}"
+                line = f"python {fig} {' '.join(data_path)} {min_length} {' '.join(region)} {filepath}"
+                #subprocess.call(line, shell=True)
+                # data_path or data
+                #subprocess.run(["python3", fig, data_path, min_length, region, filepath])
+                print(f"[{min_length}]")
+                print(line)
+                #subprocess.call(["python", fig] + data_path + [str(min_length)] + region + [filepath])
+                fig = str(fig)
+                print(fig)
+                data_path = str(data_path)
+                print(data_path)
+                min_length = str(min_length)
+                print(min_length)
+                region = str(region)
+                print(region)
+                filepath = str(filepath)
+                print(filepath)
                 subprocess.call(["python", fig, data_path, min_length, region, filepath])
+
+                print("hooray")
                 region = []
                 data_path = []
 
@@ -307,8 +334,11 @@ class CellSegmentationGUI:
 
                     # take in list of data paths and surfaces
 
-                line = f"python, {fig}, {data_path}, {min_length}, {region}, {filepath}"  # data_path or data
-                subprocess.call(["python", fig, data_path, min_length, region, filepath])
+                subprocess.call(["python", fig] + data_path + [str(min_length)] + region + [filepath])
+
+                #line = f"python, {fig}, {data_path}, {min_length}, {region}, {filepath}"  # data_path or data
+                #p1 = subprocess.call(["python", fig, data_path, min_length, region, filepath])
+                #print(p1.returncode)
                 # note: going to need to concatenate the inputs I think, make a fxn that correctly concats them.
                 # so there is more user autonomy, right now fits script tho
                 region = []
@@ -325,7 +355,7 @@ class CellSegmentationGUI:
                 if self.soft_gel_var.get() == 1:
                     region.append(self.t_2.get())
                     data_path.append(data_path_2)
-                    surface_2 = f'{surface_2}'
+                    #surface_2 = f'{surface_2}'
                     # region.append(f'{surface_2}')
                     # data_path = "2023_03_30_Data/soft_gel_data"
                 if self.glass_var.get() == 1:
@@ -337,7 +367,8 @@ class CellSegmentationGUI:
                     # data_path = "2023_03_30_Data/glass_data"
 
                 line = f"python, {fig}, {data_path}, {min_length}, {region}, {filepath}"  # data_path or data
-                subprocess.call(["python", fig, data_path, min_length, region, filepath])
+                # subprocess.call(["python3", fig, data_path, min_length, region, filepath])
+                subprocess.call(["python", fig] + data_path + [str(min_length)] + region + [filepath])
                 # note: going to need to concatenate the inputs I think, make a fxn that correctly concats them.
                 # so there is more user autonomy, right now fits script tho
                 region = []
@@ -356,11 +387,11 @@ class CellSegmentationGUI:
             self.text_widget.insert(tk.END, f"Line constructed: {line}\n")
             # self.text_widget.insert(tk.END, f"Script {script} successfully executed\n")
             # self.right_frame(text="Script executed")
-        except ValueError:
-            tk.messagebox.showerror("Error_Box", "Error! Enter integer value for min_track_length")
-        except:
-            print("error")
-            tk.messagebox.showerror("Error_Box", "Error: cannot generate graphs")
+        # except ValueError:
+         #   tk.messagebox.showerror("Error_Box", "Error! Enter integer value for min_track_length")
+        # except:
+         #   print("error")
+          #  tk.messagebox.showerror("Error_Box", "Error: cannot generate graphs")
 
 
 
