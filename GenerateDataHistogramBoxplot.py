@@ -27,8 +27,8 @@ pixel_size = 1.54
 sampling_t = 5 #min per frame
 
 #turn treatment and region into lists of strings
-treatment_list = list(map(str, treatment_input.strip('[]').split(',')))
-region_list = list(map(str, region_input.strip('[]').split(',')))
+treatment_list = list(map(eval, treatment_input.strip('[]').split(',')))
+region_list = list(map(eval, region_input.strip('[]').split(',')))
 
 #Get list of unique defining names for each data path
 treatment_names =[]
