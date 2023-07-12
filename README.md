@@ -26,6 +26,13 @@ This repository contains the source data and code for analysis. The graphical us
   2. download the .yml file named dracula.yml
   3. in conda terminal execute: ``` conda env create -f dracula.yml ```
 
+  ## GUI functionality 
+  - Figure save location: allows user to select a folder on thier device to save figures in. Subfolders for each figure types will automaticaly be created. If no lcation is selected, a folder named "figures" will automatically be created in the location where the Git repo is located.
+  - Treatment names: these names should not have spaces. Treatment names are necessary if the treatment will be used, and should correspond to the treatment selected through each data_location box. 
+  - Data location boxes: use this to navigate to the location of data on device. Note: these data should be located within a folder(which user will select). Within the folder should be pickle files of data.
+  - Choose funtion category: based on analysis necessary, select boxes for ACF Functions, CellShapeOverTrack, and Histogram & Boxplot. Multiple may be selected at once.
+  - Choose treatment to be included: Choose treatment(s) to create figures for. Note: ACF figures will not plot multiple treaments on a single figure. However, some histograms and boxplots will be created with all treatments selected on them(for inter-region comparisons).
+  - Enter minimum tack length: allows users to enter a cutoff for minimum length of track to be included.
 
 ## Code functionality
 - CellShapeOverTrack.py, GenerateDataHistogramBoxplot.py, and GenerateDataACF.py contain code tied to GUI for generation of figures/analyses
