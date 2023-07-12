@@ -13,7 +13,7 @@ This repository contains the source data and code for analysis. The graphical us
   #### 1. Executable File Option
   1. No installation required.
   2. Clone git repo (not necessary to preview GUI)
-  3. Download executable file from (link in git).
+  3. Download executable file through git 
   4. Open executable file to launch GUI.
   
   #### 2. Clone repo
