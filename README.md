@@ -12,8 +12,9 @@ This repository contains the source data and code for analysis. The graphical us
 ## Installation guide & use
   #### 1. Executable File Option
   1. No installation required.
-  2. Download executable file from (link in git).
-  3. Open executable file to launch GUI.
+  2. Clone git repo (not necessary to preview GUI)
+  3. Download executable file from (link in git).
+  4. Open executable file to launch GUI.
   
   #### 2. Clone repo
   1. install python 
