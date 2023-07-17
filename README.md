@@ -22,7 +22,7 @@ This repository contains the source data and code for analysis. The graphical us
   3. open terminal and run pip install -r reqirements.txt
   4. launch gui_analysis_interface.py
 
-  ### 3. Conda env
+  #### 3. Conda env
   1. install anaconda
   2. download the .yml file named dracula.yml
   3. in conda terminal execute: ``` conda env create -f dracula.yml ```
